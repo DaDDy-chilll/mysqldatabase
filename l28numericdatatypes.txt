@@ -1,0 +1,229 @@
+*Numeric Data Types (14 types)
+
+Data Type	Description
+1.BIT(size)	`	a bit-value type. default 1
+
+2.BOOL 		Zero is false, nonzero valuse are ture
+3.BOOLEAN	Equal to BOOL
+
+
+
+4.TINYINT(size)	A very small integer. Signed range from -128 to 127.
+		Unsigned range is from 0 to 255.
+5.SMALLINT(size) 	A small integer. Signed rage is from -32768 to 32767.
+		Unsigned range is from 0 to 65535.(65kb)
+6.MEDIUMINT(size)	A medium integer. Signed rage is from -8388608 to 8388608 
+		Unsigned range is from 0 to 16777215.(16mb)
+7.INT(size)		A medium integer.  Signed rage is from -2147483648 to 2147483648  
+		Unsigned range is from 0 to 429497295. (4GB)
+8.INTEGER(size)	Equal to INT(size).
+9.BIGINT(size)	A large integer. (18GB)
+
+
+->Fixed Point(Exact Value)
+10.DECIMAL(size,d) An exact fixed-point number eg.DECIMA(5,2) (333.33)
+11.DEC(size,d)	Equal to DECIMAL(size,d)
+
+
+->Floating-Point(Approximate Value)
+12.FLOAT(p)	a floating point number.(p optional)
+13.DOUBLE(size,d)	
+14.DOUBLE PRECISION(size,d) DOUBLE(size,d)
+NOTE: DECIMAL for finance( such as money)
+           Float for science application	
+_________________________________________________________________________________________
+BOOL and INT(size)
+
+CREATE TABLE items(
+	name VARCHAR(20),
+	price  INT(11),
+	status BOOL
+);
+INSERT INTO items(name,price)
+VALUES ('water',100),
+('coffee',500),
+('cake',800),
+('redbull',250.56),
+('jam',1000);
+
+INSERT INTO items(name,price,status)
+VALUES ('water',100,1),
+('coffee',500,0),
+('cake',800,1),
+('redbull',250.56,0),
+('jam',1000,2);
+
+INSERT INTO items(name,price,status)
+VALUES ('water',100,1),
+('coffee',-500,0),
+('cake',800,1),
+('redbull',250.56,0),
+('jam',-1000,2);
+
+SELECT * FROM items;
+DROP TABLE items;
+
+
+CREATE TABLE items(
+	name VARCHAR(20),
+	purchaseprice INT(4) SIGNED,
+	sellprice INT(4) UNSIGNED,
+	status BOOL
+);
+
+DESC items;
+
+
+INSERT INTO items(name,price,status)
+VALUES ('water',9000,9500,1),
+('coffee',-100,100,0),
+('cake',800,1000,1),
+('redbull',250.42,300.67,1),
+('jam',1000,1200,1);
+
+INSERT INTO items(name,price,status)
+VALUES ('water',9000,10000,1),
+('coffee',-100,100,0),
+('cake',800,1000,1),
+('redbull',250.42,300.67,1),
+('jam',1000,1200,1);
+
+SELLECT * FROM items;
+DROP items;
+___________________________
+DECIMAL (5,2) (Total Number of Digits, Digits after decimal)
+eg(333.33) is mean 5 digits and 2 decimal
+
+fixed-point data type reprecent exact values
+DECIMAL (5,3) = 20.234
+20.5 = 20.500
+20.52356789 = 20.524 (warning)
+
+	number	precision	scale
+	50.234	5	3
+	42.786	5	3
+
+CREATE TABLE items(
+	name VARCHAR(20),
+	price DECIMAL(6,2)
+);
+DESC items;
+
+INSERT INTO items(name,price)
+VALUE('water',500);
+
+INSERT INTO items(name,price)
+VALUE('coffee',100.43);
+
+INSERT INTO items(name,price)
+VALUE('redbull',250.56);
+
+INSERT INTO items(name,price)
+VALUE('redbull',1000);
+
+INSERT INTO items(name,price)
+VALUE('redbull',1000.99);
+
+INSERT INTO items(name,price)
+VALUE('sponsor',1000.23456);=>1000.23
+
+*error
+INSERT INTO items(name,price)
+VALUE('redbull',10000);
+
+SELECT * FROM items;	
+_______________________________________________________
+
+DECIMAL(5) = 12345
+DECIMAL(5,0) = 12345
+
+CREATE TABLE teas(
+	name VARCHAR(20),
+	ordinaryprice DECIMAL(5),
+	speicalprice DECIMAL(5,0)
+);
+
+DESC teas;
+
+*result = 56789 12345
+INSERT INTO teas(name,ordinaryprice,specialprice)
+VALUE ('milk tea',56789,123450);
+
+
+
+_______________________________________________
+
+=> Floating-Point
+=>FLOAT() Vs. DOUBLE(,)
+NOTE:: FLOAT and DOUBLE data types are floating-point types and reprecent by approximate.
+NOTE:: Balance between range and precision.
+
+FLOAT(5,3) = 20.234
+20.5 = 20.500
+20.523256789 20.524 (no warning beacause 10.54 is an approximate value)
+
+FLOAT
+CREATE TABLE shopping(
+	name VARCHAR(20),
+	purchaseprice FLOAT,
+	sellprice FLOAT(4)
+);
+DESC shopping;
+
+INSRT INTO shopping (name,purchaseprice,sellprice)
+VALUES ('water',100,100),
+('coffee',500,500,34)
+('cake',800,800.56),
+('snack',250,250.880),
+('jam',9000,10000);
+
+SELECT * FROM shopping;
+
+INSERT INTO shopping(name,purchaseprice,sellprice)
+VALUES ('brands birdnest',112233.45,112233.45);
+
+INSERT INTO shopping(name,purchaseprice,sellprice)
+VALUES ('royal birdnest',112233.45,11223344.45);
+
+INSERT INTO shopping(name,purchaseprice,sellprice)
+VALUES ('ayo birdnest',1122334455.45,1122334455.45);
+
+
+=> FLOAT vs. DOUBLE
+CREATE TABLE buyings(
+	name VARCHAR(20),
+	purchserice FLOAT,
+	sellprice DOBULE
+);
+DESC buyings;
+
+INSRT INTO buyings(name,purchaseprice,sellprice)
+VALUES ('water',100,100),
+('coffee',500.34,500,34)
+('cake',800.56,800.56),
+('snack',250.889,250.880),
+('jam',10000,10000);
+
+INSERT INTO buyings(name,purchserice,sellprice)
+VALUES ('brands birdnest',112233.45,112233.45);
+
+INSERT INTO buyings(name,purchaseprice,sellprice)
+VALUES ('royal birdnest',11223344.45,11223344.45);
+
+INSERT INTO shopping(name,purchaseprice,sellprice)
+VALUES ('ayo birdnest',1122334455.45,1122334455.45);
+
+
+INSERT INTO shopping(name,purchaseprice,sellprice)
+VALUES ('gold birdnest',112233445566.45,112233445566.45);
+
+
+result 1.12233e15 1122334455667788.45
+*e/E (exponential(exponent)) numeric symbol
+eg. 200000 can be write 2e5
+3e15 = 3000000000000000( zero 15)
+INSERT INTO shopping(name,purchaseprice,sellprice)
+VALUES ('diamond birdnest',112233445566.45,112233445566.45);
+
+INSERT INTO shopping(name,purchaseprice,sellprice)
+VALUES ('platinum birdnest',112233445566778899.45,112233445566778899.45);

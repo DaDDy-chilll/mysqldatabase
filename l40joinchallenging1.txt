@@ -1,0 +1,73 @@
+=>JOIN Challening 1
+
+------------
+=>Report
+
+SELECT * FROM members;
+SELECT * FROM mbphones;
+SELECT * FROM mbpoints;
+
+
+=>Active and Block Members
+-SELECT CONCAT(firstname,' ',lastname) AS active_members FROM members
+WHRE status = 1;
+
+-SELECT CONCAT(firstname,' ',lastname) AS block_members FROM members
+WHRE status = 2;
+
+=>Phone Number
+SELECT CONCAT(firstname,' ',lastname) AS name,phone FROM members
+LEFT JOIN mbphones
+ON members.id = mbphones.member_id;
+
+=>IS NOT NULL
+SELECT CONCAT(firstname,' ',lastname) AS name,
+IF (mbphones.phone IS NOT NULL,mbphones.phone,'No Number') AS 'phone'
+FROM members
+LEFT JOIN mbphones
+ON members.id = mbphones.member_id;
+
+=>IS  NULL
+SELECT CONCAT(firstname,' ',lastname) AS name,
+CASE
+WHEN mbphones.phone IS NULL THEN 'NO Number'
+ELSE  mbphones.phone
+END Phone
+FROM members
+LEFT JOIN mbphones
+ON members.id = mbphones.member_id;
+
+=>Point Report
+SELECT CONCAT(firstname,' ',lastname) AS name,SUM(point) AS Point FROM members
+LEFT JOIN mbpoints
+ON members.id = mbpoints.member_id
+GROUP BY members.id;
+
+
+=>Three Tables join
+ SELECT CONCAT(firstname,' ',lastname) AS name,phone,point FROM members
+    -> LEFT JOIN mbphones
+    -> ON members.id = mbphones.member_id
+    -> LEFT JOIN mbpoints
+    -> ON members.id = mbphones.member_id;
+
+=>COLUMN name with Alias(AS)
+SELECT firstname,lastname,phone,point FROM members AS mb
+    -> LEFT JOIN mbphones AS mbp
+    -> ON mb.id = mbp.member_id
+    -> LEFT JOIN mbpoints AS mbpo
+    -> ON mb.id = mbpo.member_id;
+
+SELECT mb.firstname,mb.lastname,mbp.phone,mbpo.point FROM members AS mb
+LEFT JOIN mbphones AS mbp
+ON mb.id = mbp.member_idS
+LEFT JOIN mbpoints AS mbpo
+ON mb.id = mbpo.member_id;
+
+SELECT mb.firstname,mb.lastname,mbp.phone,mbpo.point FROM members mb
+LEFT JOIN mbphones  mbp
+ON mb.id = mbp.member_id
+LEFT JOIN mbpoints  mbpo
+ON mb.id = mbpo.member_id;
+
+-------------------------------------------

@@ -1,0 +1,83 @@
+LIKE Operator
+
+Wildcards (7 types)
+
+-WHERE customername LIKE 'a%' (Finds any values that start with 'a'
+-WHERE customername LIKE '%a' (Finds any values that end with 'a'
+-WHERE customername LIKE '%or%' (Finds any values that have "or" in any position
+-WHERE customername LIKE '_r%' (Finds any values that have "r" in the second position
+-WHERE customername LIKE 'a_%' (Finds any values that star with "a"  and are at least 2 charcters in length
+-WHERE customername LIKE 'a__%' (Finds any values that star with "a"  and are at least 3 charcters in length
+-WHERE customername LIKE 'a%o' (Finds any values that start with 'a' and ends with 'o'
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax
+
+Method 1
+
+SELECT * FROM tablename
+WHERE columnname LIKE pattern;
+
+Method 2
+SELECT column1,column2,column3,..
+FROM tablename
+WHERE columnname LIKE pattern;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+exercise
+SELECT name,age,salary,city
+FROM employees
+WHERE name LIKE 'maung maung''
+
+SELECT name,age,salary,city
+FROM employees
+WHERE salary LIKE '1%';
+
+SELECT name,age,salary,city
+FROM employees
+WHERE name LIKE '%ng';
+
+SELECT name,age,salary,city
+FROM employees
+WHERE name LIKE '%zaw%';
+
+SELECT name,age,salary,city 
+FROM employees 
+WHERE name LIKE 'T%';
+
+SELECT name,age,salary,city
+FROM employees
+WHERE name LIKE '%NG';
+
+SELECT name,age,salary,city
+FROM employees
+WHERE name LIKE '%ZAW%';
+
+SELECT name,age,salary,city 
+FROM employees 
+WHERE name LIKE '_a%';
+
+SELECT name,age,salary,city 
+FROM employees 
+WHERE name LIKE 'a_%';
+
+SELECT name,age,salary,city 
+FROM employees 
+WHERE name LIKE 'a__%';
+
+SELECT name,age,salary,city 
+FROM employees 
+WHERE name LIKE 'a%g';
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+exercise (LIKE '____')
+NOTE:::_ is mean any one character
+
+SELECT name,age,salary,city 
+FROM employees 
+WHERE salary LIKE '_____';
+
+exercise (LIKE '%')
+
+SELECT * FROM employees WHERE name '%';
+
+SELECT * FROM employees WHERE name LIKE '%\_%'; (\ is mean for speical escape character)
+
+SELECT * FROM employees WHERE name LIKE '%\%%';

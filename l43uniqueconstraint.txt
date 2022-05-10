@@ -1,0 +1,189 @@
+=>UNIQUE Constraint
+
+=CONSTRAINT
+PRIMARY KEY
+FOREIGN KEY
+NOT NULL
+UNIQUE
+DEFAULT
+CHECK
+
+=Syntax;
+
+Method 1 (single colum)
+
+CREATE TABLE IF NOT EXISTS tablename(
+colum1 datatype,
+colum2 datatype UNIQUE,
+colum3 datatype,
+.....
+);
+
+
+Method 2 (single colum)
+
+CREATE TABLE IF NOT EXISTS tablename(
+colum1 datatype,
+colum2 datatype,
+colum3 datatype,
+.....
+ UNIQUE(column2)
+);
+
+Method 1 (multi colum)
+
+CREATE TABLE IF NOT EXISTS tablename(
+colum1 datatype UNIQUE,
+colum2 datatype UNIQUE,
+colum3 datatype UNIQUE,
+.....
+);
+
+_________________________________________________________________
+Method 1 (single colum)
+
+CREATE TABLE IF NOT EXISTS countries(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL UNIQUE,
+	capital VARCHAR(50) NOT NULL,
+	currencyname VARCHAR(30),
+	isocode VARCHAR(10)
+);
+
+
+SHOW INDEX FROM countries;
+
+
+=>DROP unique Key
+
+ALTER TABLE countries DROP INDEX name;
+
+DROP TABLE IF EXISTS countries;
+
+INSERT INTO countries(name,capital,currencyname,isocode)
+VALUES('myanmar','naypyidaw','myanmar kyat','mmk'),
+('thailand','bangkok','thai baht','thb'),
+('indonesia','jakata','indonesia rupiah','idr'),
+('srilanka','colombo','srilanka rupee','lkr');
+
+SELECT * FROM countries;
+
+*error
+INSERT INTO countries(name,capital,currencyname,isocode)
+VALUES('myanmar','yangon','myanmar kyat','mmk');
+
+UPDATE countries SET name='thailand' WHERE id = 4;
+
+UPDATE countries SET name='sri lanka' WHERE id = 4;
+____________________________________________________________________
+Method 2 (single colum)
+
+CREATE TABLE IF NOT EXISTS countries(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL ,
+	capital VARCHAR(50) NOT NULL,
+	currencyname VARCHAR(30),
+	isocode VARCHAR(10),
+	UNIQUE(name)
+);
+
+INSERT INTO countries(name,capital,currencyname,isocode)
+VALUES('myanmar','naypyidaw','myanmar kyat','mmk'),
+('thailand','bangkok','thai baht','thb'),
+('indonesia','jakata','indonesia rupiah','idr'),
+('srilanka','colombo','srilanka rupee','lkr');
+____________________________________________________________________
+=>Method 1 (multi colum)
+
+CREATE TABLE IF NOT EXISTS cashiers(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL UNIQUE,
+	password VARCHAR(100) NOT NULL,
+	phone VARCHAR(15) UNIQUE
+);
+DESC cashiers;
+SHOW INDEX FROM cashiers;
+
+
+ALTER TABLE cashiers DROP INDEX phone;
+
+INSERT INTO cashiers (name,email,password,phone)
+VALUES('susu','susu@gmail.com',MD5(SHA1(12345)),'0911111'),
+('yuyu','yuyu@gmail.com',MD5(SHA1(12345)),'092222'),
+('hlahla','hlahla@gmail.com',MD5(SHA1(12345)),'093333');
+
+*error
+INSERT INTO cashiers (name,email,password,phone)
+VALUES('mama','susu@gmail.com',MD5(SHA1(12345)),'0911111');
+
+
+INSERT INTO cashiers (name,email,password)
+VALUES('mgmg','mgmg@gmail.com',MD5(SHA1(12345)));
+____________________________________________________________________
+
+=>CONTRAINT
+
+CREATE TABLE IF NOT EXISTS cashiers(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	password VARCHAR(100) NOT NULL,
+	phone VARCHAR(15),
+	CONSTRAINT uc_emial_phone UNIQUE(email,phone)
+);
+
+DESC cashiers;
+SHOW INDEX FROM cashiers;
+
+INSERT INTO cashiers (name,email,password,phone)
+VALUES('susu','susu@gmail.com',MD5(SHA1(12345)),'0911111'),
+('yuyu','yuyu@gmail.com',MD5(SHA1(12345)),'092222'),
+('hlahla','hlahla@gmail.com',MD5(SHA1(12345)),'093333');
+
+
+**error
+INSERT INTO cashiers (name,email,password,phone)
+VALUES('mama','susu@gmail.com',MD5(SHA1(12345)),'0911111');
+
+
+
+ALTER TABLE cashiers DROP INDEX uc_emial_phone;
+DESC cashiers;
+SHOW INDEX FROM cashires;
+
+
+DROP TABLE IF EXISTS cashiers;
+
+
+
+SALES
+INVID
+INVDATE
+CAHID
+CUID
+
+customer
+id
+cuid
+YG
+____________________________________________________________________
+=> UNIQUE VS CONSTRAINT
+
+CREATE TABLE IF NOT EXISTS cashiers(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	password VARCHAR(100) NOT NULL,
+	phone VARCHAR(15),
+	UNIQUE(name),
+	CONSTRAINT uc_emial_phone UNIQUE(email,phone)
+);
+
+
+INSERT INTO cashiers (name,email,password,phone)
+VALUES('susu','susu@gmail.com',MD5(SHA1(12345)),'0911111'),
+('yuyu','yuyu@gmail.com',MD5(SHA1(12345)),'092222'),
+('hlahla','hlahla@gmail.com',MD5(SHA1(12345)),'093333');
+____________________________________________________________________
+

@@ -1,0 +1,126 @@
+=> Temporary Table
+=>Syntax
+CREATE TEMPORARY TABLE IF NOT EXISTS tablename(
+	column1 datatype,
+	column2 datatype,
+	column3 datatype,
+	....
+);
+
+CREATE TEMPORARY TABLE IF NOT EXISTS workers(
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(20),
+	age INT,
+	city VARCHAR(50),
+	PRIMARY KEY(id)
+);
+
+DESC workers;
+
+SHOW TABLES;
+
+INSERT INTO workers(name,age,city)
+VALUES('aung aung',20,'yangon'),
+('kyaw kyaw',30,'mandalay');
+
+SELECT * FROM workers;
+
+DROP TABLE workers;
+
+CREATE TEMPORARY TABLE IF NOT EXISTS workers(
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(20),
+	age INT,
+	city VARCHAR(50),
+	PRIMARY KEY(id)
+);
+
+INSERT INTO workers(name,age,city)
+VALUES('aung aung',20,'yangon'),
+('kyaw kyaw',30,'mandalay');
+
+===create table and then change table name
+
+ALTER TABLE workers
+RENAME TO employeeguys;
+
+DROP Temporrary Table;
+DROP TABLE employeeguys;
+DROP TABLE IF EXISTS employeeguys;
+DROP TEMPORARY TABLE employeeguys;
+----------------------------------------------------
+=>TURNCATE
+
+CREATE TABLE IF NOT EXISTS monitors(
+id INT NOT NULL AUTO_INCREMENT,
+brand VARCHAR(100),
+price DECIMAL(8,2),
+PRIMARY KEY(id)
+);
+
+INSERT INTO monitors(brand,price)
+VALUES ('asus',400000),
+('acer',500000),
+('aoc',600000),
+('dell',700000);
+SELECT * FROM monitors;
+
+DROP TABLE IF EXISTS monitors;
+
+CREATE TABLE IF NOT EXISTS monitors(
+id INT NOT NULL AUTO_INCREMENT,
+brand VARCHAR(100),
+price DECIMAL(8,2),
+PRIMARY KEY(id)
+);
+
+DESC monitors;
+
+SHOW TABLES;
+
+INSERT INTO monitors(brand,price)
+VALUES ('asus',400000),
+('acer',500000),
+('aoc',600000),
+('dell',700000);
+
+SELECT * FROM monitors;
+
+DELETE FROM monitors;
+
+TRUNCATE TABLE monitors;
+___________________________________________
+=> RENAME TABLE 
+
+=>Syntax 
+ALTER TABLE oldtablenmae
+RENAME TO newtablename;
+
+CREATE TABLE IF NOT EXISTS stocks(
+  item VARCHAR (100),
+  stock INT
+);
+
+DESC stocks;
+
+INSERT INTO stocks(item,stock)
+VALUES('desktop',20),
+('laptop',10),
+('projector',5);
+
+SELECT * FROM stocks;
+
+SHOW TABLES;
+
+ALTER TABLE stocks
+RENAME TO itaccessories;
+
+SHOW TABLES;
+
+SELECT * FROM stocks; //stocks mar bar ma ma shi tot bu
+
+
+SELECT * FROM itaccessories; //di mar pl shi tot tar
+
+ALTER TABLE itaccessories
+RENAME TO stocks;

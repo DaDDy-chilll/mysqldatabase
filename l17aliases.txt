@@ -1,0 +1,39 @@
+Aliases (Easier to read results)(not change on records but change on results)
+Aliases Syntax
+
+Method 1
+-SELECT columname AS aliasname
+FROM tablename;
+-------------------------------------------------------
+exercise
+
+SELECT * FROM employees;
+
+SELECT name AS fullname
+FROM employees;
+
+SELECT employeeid AS id 
+FROM employees;
+
+SELECT employeeid AS id,name AS fullname
+FROM empoyees;
+
+SELECT employeeid AS id,name AS fullname,age,city AS township 
+FROM employees;
+
+__real world code style___
+SELECT 
+	employeeid AS id,
+	name AS fullname,
+	age,
+	salary,
+	city AS township 
+FROM employees;
+
+ SELECT employeeid AS id,
+	name AS 'full name',
+	age,
+	salary AS 'pay amoount',
+	city AS 'town ship' 
+FROM employees;
+

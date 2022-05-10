@@ -1,0 +1,106 @@
+Select Data By Using And, Or  and Not(logical Operators)
+
+AND OR operators are used to filter data , records based
+
+AND - operator display a record *TRUE* 
+OR - operator display a recordd *TRUE*
+NOT - operator display a recordd *NOT TRUE*
+
+WHERE clause can be combined with AND , OR , NOT operators
+*real world မှာဆို တစ်ခါပဲစစ်ထုတ်ရမယ်/ အများဆုံး two 
+__AND Syntax__
+Method 1 AND syntax
+-SELECT * FROM tablename
+-WHERE country='myanmar' AND city='yangon';
+ 
+Method 2 AND syntax
+-SELECT column1,column2,...  FROM tablename
+-WHERE country='myanmar' AND city='yangon';
+
+__OR Syntax__
+Method 1 OR syntax
+-SELECT * FROM tablename
+-WHERE NOT country='thailand';
+ 
+__NOT Syntax__
+Method 2 NOT syntax
+-SELECT column1,column2,...  FROM tablename
+-WHERE NOT country='thailand';
+
+Method 1 AND syntax
+-SELECT * FROM tablename
+-WHERE country='myanmar' AND city='yangon';
+ 
+Method 2 AND syntax
+-SELECT column1,column2,...  FROM tablename
+-WHERE country='myanmar' AND city='yangon';
+--------------------------------------------------------------------------------
+_Exercise_
+-SELECT * FROM employees;
+
+-SELECT name,age,city FROM employees;
+
+-SELECT employeeid,name,salary FROM employees
+WHERE salary > 200000;
+
+-SELECT employeeid,name,salary FROM employees
+WEHERE salary < 200000;
+
+-SELECT employeeid,name,salary FROM employees
+WHERE salary >= 200000;
+
+-SELECT employeeid,name,salary FROM employees
+WHERE salary <= 200000;
+
+-SELECT employeeid,name,salary FROM employees
+WHERE salary <> 200000;
+
+-SELECT employeeid,name,salary FROM employees
+WHERE salary = 200000;
+
+-SELECT employeeid,name,salary FROM employees
+WHERE salary LIKE 200000;
+
+-SELECT employeeid,name,age,salary FROM employees
+WHERE salary > 300000;
+
+
+-SELECT employeeid,name,age,salary FROM employees
+WHERE salary > 300000 AND age > 30;
+
+-SELECT employeeid,name,age,salary FROM employees
+WHERE salary > 300000 AND age >= 30;
+
+-SELECT employeeid,name,age,salary FROM employees
+WHERE salary > 300000 AND age >= 30 AND city='yangon';
+--------------------------------------------------------------------------------
+__OR exercise__
+
+-SELECT employeeid,name,age,salary FROM employees
+WHERE salary > 300000 OR age > 20 AND city='yangon';
+--------------------------------------------------------------------------------
+__NOT exercise__
+
+-SELECT employeeid,name,age,salary,city FROM employees
+WHERE NOT city='mandalay';
+
+-SELECT employeeid,name,age,salary,city FROM employees
+WHERE NOT  age < 25;
+
+-SELECT employeeid,name,age,salary,city FROM employees
+WHERE NOT  age < =25;
+
+-SELECT employeeid,name,age,salary,city FROM employees
+WHERE NOT  city='mandalay';
+
+-SELECT employeeid,name,age,salary,city FROM employees
+WHERE NOT  city='mandalay' AND NOT  city='yangon';
+__Comparison Operators__
+= equal
+> greater than
+< less than
+>= greater than and equal
+<= less than and equal
+<> greater than and less than
+
+Like Operator

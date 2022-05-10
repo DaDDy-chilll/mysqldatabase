@@ -1,0 +1,55 @@
+-ssh wdf6274@dltmyanmar.com
+-datalandtechnology
+----------------------------
+______________________________________________
+Databe Login
+
+-mysql -u WDF6274 -p
+-datalandtechnology
+
+----------------------------
+Version Check
+
+Method-1(in server)
+-mysql -V
+
+Method-2(in sql)
+-status
+________________________________________
+Arithmetic Operators(5types)
+
+operator        Meaning         operates on
++(add)          Addition        Numeric value
+-(subract)      subraction      Numeric value
+*(multiply)     Muliplication   Numeric value
+_____________________________________________________________________________________________________________________________________
+Addition Operator = Suytax
+
+SELECT 10 + 2;
+SELECT '10' + 2;
+SELECT '10' + '2';
+SELECT 10+2,20 + 30;
+SELECT '100' + '200','300' + '400';
+
+Subtraction Operator = Syntax
+SELECT 10 - 2;
+SELECT 20-10, 30 - 15;
+SELECT '1000' - '500', '500' - '700';
+
+Multiplication Operator = Syntax
+SELECT 10 * 2;
+SELECT 5*3, 15 * 5;
+SELECT 20 * '3' , '100' * 5;
+
+Division Operator and DIV = Syntax
+SELECT  10 / 2;
+SELECT 2/3 , 3 / 5;
+SELECT 100/ '25', '2000' /2 , 12 / 0;
+-SELECT 20 DIV 3; DIV နဲ့ စားရင် အကျွန်းကို ကိန်းပြည့်ပဲပြမယ် 
+SELECT 5 DIV 2, -40 DIV 3, -100 DIV -7;
+
+Modulus Operator = Syntax (အကျွန်းကိုရှာတာ)
+SELECT 10 % 3;
+SELECT 2%3 ,3%5
+SELECT 20 % '3', '100' % 5;
+

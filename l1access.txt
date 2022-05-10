@@ -1,0 +1,25 @@
+-ssh wdf6274@dltmyanmar.com
+-datalandtechnology
+----------------------------
+______________________________________________
+Databe Login
+
+-mysql -u WDF6274 -p 
+-datalandtechnology
+
+----------------------------
+Version Check
+
+Method-1(in server)
+-mysql -V
+
+Method-2(in sql)
+-status
+________________________________________
+Arithmetic Operators(5types)
+
+operator	Meaning		operates on
++(add)		Addition	Numeric value
+-(subract)	subraction	Numeric value
+*(multiply)	Muliplication	Numeric value
+___________________________________________

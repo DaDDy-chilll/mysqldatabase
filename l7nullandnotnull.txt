@@ -1,0 +1,67 @@
+_Null and Not Null_
+
+Null Datatype
+CREATE TABLE stus(
+	name VARCHAR(10),
+	age INT(11)
+);
+----------------------------------------------
+INSERT INTO stus(name,age)
+VALUES ('aung','aung',20);
+
+INSERT INTO stus(name)
+VALUE ('ma ma');
+
+INSERT INTO stus(age)
+VALUE (20);
+
+INSERT INTO stus()
+VALUE ();
+
+DROP TABLE stus;
+---------------------------
+Not Null (we can call mandatory)
+
+CREATE TABLE stus(
+	name varchar(10) NOT NULL;
+	age INT(11)
+);
+-----------------------------------
+INSERT INTO stus (name,age)
+VALUE ('aung aung',20);
+
+INSERT INTO stus (name,age)
+VALUE ('su su',20);
+
+INSERT INTO stus (name,)
+VALUE ('ye ye');
+
+**error**
+INSERT INTO stus (age)
+VALUE (20);
+**error**
+INSERT INTO stus ()
+VALUE ();
+ INSERT INTO stus
+ VALUE (20);
+
+DROP TABLE stus;
+-----------------------------------------------------
+CREATE TABLE stus(
+	name varchar(10) NOT  NULL,
+	age int(11) NOT NULL
+);
+
+INSERT INTO stus(name,age)
+VALUE ('aung aung',20);
+INSERT INTO stus(name,age)
+VALUE ('su su',30);
+**error**
+INSERT INTO stus(name)
+VALUE ('ma ma');
+**error**
+INSERT INTO stus(age)
+VALUE (20);
+**error**
+INSERT INTO stus()
+VALUE ();

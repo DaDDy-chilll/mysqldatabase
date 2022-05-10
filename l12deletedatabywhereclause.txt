@@ -1,0 +1,34 @@
+__Delete Record__
+
+Delete Syntax
+-DELETE FORM  tablename WHERE condition;
+
+eg. Syntax
+*will be in single
+DELETE FORM customers WHERE id='xxxx';
+
+*will be multi record
+DELETE FROM customers WHERE customername='aung aung';
+
+*Delete all records
+DELETE FROM tablename;
+
+_________________________________________________________
+SELECT * FROM stus
+DELETE FROM stus WHERE name ='aung aung';
+
+DELETE FROM stus WHERE name ='su su';
+
+INSERT INTO stus (name,age)
+VALUE ('aung aung',18),
+('su su',19),
+('hla hla',20),
+('nu nu',21);
+
+-delete all age 18 record in table
+ DELETE FROM stus WHERE age=18
+
+-delete all record in table
+DELETE FROM  stus;
+
+

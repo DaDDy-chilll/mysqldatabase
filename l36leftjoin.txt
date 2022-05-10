@@ -1,0 +1,31 @@
+=>LEFT  JOIN
+
+=Syntax
+
+SELECT colums
+FROM table1
+LEFT JOIN table2
+ON table1.column = table2.column;
+
+_________________________________________________
+INNER JOIN
+
+SELECT * FROM customers
+INNER JOIN orders
+ON customers.id = orders.customer_id;
+
+LEFT JOIN
+SELECT * FROM customers
+LEFT JOIN orders
+ON customers.id = orders.customer_id;
+
+SELECT * FROM orders
+LEFT JOIN customers
+ON customers.id = orders.customer_id;
+----------
+
+SELECT firstname,lastname,orderdate,SUM(amount),COUNT(*) FROM customers
+LEFT JOIN orders
+ON customers.id = orders.customer_id
+GROUP BY customers.id
+ORDER BY total_amount;

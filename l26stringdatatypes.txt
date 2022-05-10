@@ -1,0 +1,322 @@
+__Mysql Data Types (v8)
+
+*String Data Types - ( 14 types 6/6/2 )
+Data Type		Description
+1.CHAR(size)		-A FIXED Length string (can contain letters,numbers and 
+			spcial characters) . can be from 0    to 255
+2.VARCHAR(size)		-A Variable Lenth string (can contain letters,numbers and 
+			special characters ) , can be from 0 to 65535
+3.TEXT(size)(show tinytext
+and not show size)		-can be from 256  to 65535	
+		
+4.TINYTEXT			-can be from 1 to 255
+
+5.MEDIUMTEXT		-can be from 65536	to 16777215 characters(16 MB)
+
+6.LONGTEXT		-can be from 16777216 to 4294967295 characters( 4 GB )
+---------------
+7.BINARY(size)		-Equal to CHAR()
+8.VARBINARY(size)		-Equal to VARCHAR()
+9.BLOB(size)		- For BLOBS can be from 256 to 65535 (65 bytes)
+10.TINYBLOB		-For BLOBS can be from 1 to 255 (255 bytes)
+11.MEDIUMBLOB		-for blobs can be from 256 to 16777215 caharcters (16MB)
+12.LONGBLOB		-for blobs can be from 16777216 to 4294967295 characters (4 GB)
+--------------------
+13.ENUM('vaule1','value2','value3',...)	a string object can have only one value. must be possible value.(65 kb
+14.SET('vaule1','value2','value3',...)	a string object that can have 0 or more value. must be possible value.
+___________________________________________________________________________________________
+--About CHAR
+*CHAR is faster than VARCHAR
+*Static Datatype
+*eg: Telephone numbers, ZIP code
+*eg: Yes/No Flages: Y/N
+*eg: Sex : Male/Female Flages: M/F
+
+Non-Unicode = 1 Character = 1byte
+`1 byte = 8 bits
+CHAR(4) VS VARCHAR(4)
+value		CHAR(4)		Storage		VARCAHR(4) 	Storage
+''		'  '		4bytes		''		1bytes
+'abc'		'ab  '		4bytes		'ab'		3bytes
+'abc'		' abc '		4bytes		'abc '		4bytes
+'abcd'		' abcd '		4bytes		'abcd '		5bytes
+'abcdefg'		' error'		error		'abcdefg '	bytes
+
+CREATE TABLE contacts(
+	name CHAR(5)
+);
+
+DESC contacts;
+
+INSERT INTO contacts(name)
+VALUES ('ko');
+
+INSERT INTO contact(name)
+VALUES ('ko ko');
+
+INSERT INTO contact(name)
+VALUES ('hello');
+
+INSERT INTO contact(name)
+VALUES ('heynow');
+
+INSERT INTO contact(name)
+VALUES ('now hey');
+
+INSERT INTO contact(name)
+VALUES ('aung'),
+	('maung'),
+	('ko');
+INSERT INTO contacts(name) 
+VALUES('')
+
+DROP TABLE contacts;
+------------------------------------------------------------
+CREATE TABLE contacts(
+	name VARCHAR(5)
+);
+
+NSERT INTO contacts(name)
+VALUES ('ko');
+
+INSERT INTO contact(name)
+VALUES ('ko ko');
+
+INSERT INTO contact(name)
+VALUES ('hello');
+
+INSERT INTO contact(name)
+VALUES ('heynow');
+
+INSERT INTO contact(name)
+VALUES ('now hey');
+
+INSERT INTO contact(name)
+VALUES ('aung'),
+	('maung'),
+	('ko');
+
+INSERT INTO contacts(name) 
+VALUES('')
+
+DROP TABLE contacts;
+___________________________________________________________________________________________
+__CHAR () / VARCHAR() vs TEXT()
+
+CREATE TABLE mytests(
+	id INT DEFAULT 10,
+	name VARCHAR(50);
+);
+INSERT INTO mytest(name)
+SELECT * FROM mytests;
+DROP table mytests;
+
+ CAREATE TABLE mytests(
+	id INT,
+	name VARCHAR(50) DEFAULT  'nothing to show'
+);
+INSERT INTO mytests(name) VALUES ('aung aung');
+INSERT INTO mytests(id) VALUES(10);
+
+ CAREATE TABLE mytests(
+	id INT,
+	name TEXT(50)
+);
+
+*error (BLOB.TEXT,GEMOETRY or JSON can't hove a DEFAULT value)
+CREATE TABLE mytests(
+	id INT,
+	name TEXT(50) DEFAULT 'hay now'
+);
+___________________________________________________________________________________________
+__VARIABLES
+
+SHOW VARIABLES
+
+SHOW CHARACTER SET;
+*utf8_general_ci (ci is case insensitive) maxlength 3 is mean 3 bytes per character;
+
+*SHOW CHARACTER SET = for a single Databse
+SHOW  VARIABLES LIKE 'character_set_databse';
+SHOW VARIABLES LIKE 'collation_database';
+
+*SHOW CHARACTER SET = for a single table;
+SHOW FULL COLUMNS FROM mytests;
+
+CREATE TABLE mytests(
+	col1 TINYTEXT,
+	col2 TEXT,
+	col3 MEDIUMTEXT,
+	col4 LONGTEXT
+);
+
+DROP TABLE mytests;
+
+CREATE TABLE mytests(
+    -> col1 TEXT,
+    -> col2 TEXT(0),
+    -> col3 TEXT(5));
+INSERT INTO mytests(col1,col2,col3)
+VALUES ('aung aung','maung maung','kyaw kyaw');
+
+
+ CREATE TABLE mytests(
+    -> col1 TEXT(255), -- 1-255 tinytext
+    -> col2 TEXT65535), -- 256-65535 text
+    -> col3 TEXT(16777215), -- 65536-16777215 medium text
+    -> col4 TEXT(4294967295) -- 16777216-4294967295 long text
+    -> ) ENIGING=InnoDB CHARSET=latin1;
+
+DESC mytests;
+DROP TABLE mytests;
+
+CREATE TABLE mytests(
+    -> col1 TEXT(255), -- 1-255 
+    -> col2 TEXT65535), -- 256-65535
+    -> col3 TEXT(16777215), -- 65536-16777215
+    -> col4 TEXT(4294967295) -- 16777216-4294967295 
+    -> ) ENIGING=InnoDB CHARSET=latin1;
+
+DESC mytests;
+SHOW FULL COLUMNS FROM mytests;
+SHOW TABLE STATUS WHRER NAME LIKE 'mytests';
+SHOW CREATE TABLE mytests;
+DROP TABLE mytests;
+
+CREATE TABLE mytests(
+    -> col1 TEXT(255), -- 1-255 
+    -> col2 TEXT65535), -- 256-65535
+    -> col3 TEXT(16777215), -- 65536-16777215
+    -> col4 TEXT(4294967295) -- 16777216-4294967295 
+    -> ) ENGINE=InnoDB CHARSET=utf8;
+
+Metho1 
+check charset
+SHOW VARIABLES LIKE 'character_set_database';
+check collection
+SHOW VARIABLES LIKE 'collation_database';
+
+Method2(system variables_
+SELECT @@character_set_database;
+
+SELECT @@collation_database;
+
+Method 3
+SELECT DEFAULT_CHARCATER_SET_NAME
+FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'wdf6274';
+
+SELECT DEFAULT_CHARACTER_SET_NAME,DEFAULT_COLLATION_NAME
+FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'wdf6274';
+
+**show character set = for all database
+
+SELECT SCHEMAT_NAME 'database' FROM INFORMATION_SCHEMA.SCHEMATA;
+
+SELECT DEFAULT_CHARACTER_SET_NAME FROM INFORMATION_SCHEMA.SCHEMATA
+
+SELECT DEFAULT_collatoin_NAME 'collation name' 
+FROM INFORMATION_SCHEMA.SCHEMATA;
+
+SELECT SCHEMA_NAME 'ALL DATABSE',DEFAULT_CHARACTER_SET_NAME 'CHAR SET',DEFAULT_COLLATION_NAME
+FROM INFORMATION_SCHEMA.SCHEMATA;
+
+**SHOW CHARACTER SET = for getting the collation from FIELD NAME
+SHOW FULL COLUMS FROM tablename WHERE field = 'name';
+
+________________________________________________________________
+example char and binary
+
+*error in 256
+CREATE TABLE mytests(
+	col1 CHAR,
+	col2 CHAR(255)
+);
+
+*error in 256
+CREATE TABLE mytests(
+	col1 BINARY
+	col2 BINARY(255)
+);
+CREATE TABLE mytests(
+	col1 BINARY(30)
+);
+DESC mytests;
+
+INSERT INTO mytests (col1)
+VALUE ('kyaw kyaw aung');
+SELECT * FROM mytests;
+________________________________________________________________
+ENUM (enumeration) (Like html <select> option)
+
+CREATE TABLE motos(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(50),
+	gender ENUM('M','F','Other') NOT NULL
+);
+DESC motos;
+
+INSERT INTO motos(name,gender)
+VALUES ('aung aung','M');
+
+*error
+INSERT INTO motos(name,gender)
+VALUES ('aung aung','K');
+
+INSERT INTO motos(name,gender)
+VALUES ('hla hla','f');
+
+INSERT INTO motos(name,gender)
+VALUES ('hla hla','other');
+
+INSERT INTO motos(name,gender)
+VALUES ('hla hla',2);(1,2,3 is defined M,F,Other > gender ENUM('M','F','Other') NOT NULL)
+1 for M
+2 for F
+3 for Other
+INSERT INTO motos(name,gender)
+VALUES ('hla hla','2');
+
+*error
+INSERT INTO motos(name,gender)
+VALUES ('hla hla','4');
+
+*error
+INSERT INTO motos(name,gender)
+VALUES('kyaw kyaw','f,m');
+----------------------
+SET 
+
+CREATE TABLE motas(
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	name VARCHAR(50);
+	role SET('C','R','U','D') NOT NULL;
+);
+DESC motas;
+INSET INTO motas(name,role)
+VALUE('aung aung','C');
+
+INSET INTO motas(name,role)
+VALUE('su su','d');
+
+INSET INTO motas(name,role)
+VALUE('nu nu',3);
+
+INSET INTO motas(name,role)
+VALUE('tun tun','c,r');
+
+INSET INTO motas(name,role)
+VALUE('tun tun','c,r,d');
+*result = c,r,u,d
+INSERT INTO motas(name,role) 
+VALUE('nu nu','c,r,u,d,c');
+
+
+*error
+INSET INTO motas(name,role)
+VALUE('tun tun','1,2');
+
+*error
+INSET INTO motas(name,role)
+VALUE('tun tun',1,2);
+
+12EN	

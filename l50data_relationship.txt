@@ -1,0 +1,38 @@
+=>Different Types of DATA Relationships
+(i)One to One Relationship(1:1)
+(ii)One to Many Relationship(1:n)
+(iii)Many to Many Relationship(n:n)
+
+(i)One to One Relatonship
+
+	NOTE; an employee has exactyl one wifi password and ever wifi passcode belongs to exactly one employess
+	husband & wife
+	citizen & passport
+
+(ii)One to Many Relationship
+	one record in table A has one or many related records in tabe B
+	customer & orders
+	mother & childern
+
+(iii)Many to Many Relationship(n:n)
+	One record in table A has one or many related tables in table B by using Dummy table,
+
+
+
+
+
+
+
+user
+id
+firstname
+lastname
+email
+password
+dob
+gender
+phone
+address
+eduction
+propic
+coverpho

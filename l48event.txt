@@ -1,0 +1,146 @@
+=>Event
+
+Event Types ( Schedule)
+(i) One Time Event
+(ii) Recurring Event
+
+=Syntax: One Time Event
+
+=Method 1
+
+CREATE EVENT event_name
+ON SCHEDULE AT timestamp
+DO
+----statements
+
+
+=Method 2 (not dropped)
+
+CREATE EVENT event_name
+ON SCHEDULE AT timestamp
+ON COMPLETION PRRSERVE
+DO
+----statements
+
+
+=Syntax: Recurring Event
+
+-Method 1
+CREATE EVENT event_name
+ON SCHEDULE EVERY INTERVAL
+STARTS timestamp
+DO 
+-- statements
+
+-Method 2
+CREATE EVENT event_name
+ON SCHEDULE EVERY INTERVAL
+STARTS timestamp
+ENDS timestamp
+DO 
+-- statements
+__________________________________________________________________
+=>(i) One Time Event
+
+=Method 1
+
+CREATE TABLE IF NOT EXISTS vipcustomers(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	emailverify INT DEFAULT 2
+);
+
+DESC vipcustomers;
+
+INSERT INTO vipcustomers(name,email,emailverify)
+VALUES('hal hal','halhal@gmail.com',2),
+('thaw thaw','thawthaw@gmail.com',2),
+('kyaw kyaw','kyawkyaw@gmail.com',2);
+
+
+
+CREATE EVENT vipcustomers_eve
+ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 60 SECOND
+DO
+DELETE FROM vipcustomers WHERE emailverify =2;
+
+SELECT * FROM vipcustomers;
+
+->list all Events
+SHOW EVENTS;
+
+SELECT * FROM vipcustomers;
+
+________________
+=Method 2 (not dropped)
+=>Not dropped after execution
+
+CREATE EVENT vipcustomers_eve
+ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 60 SECOND
+ON COMPLETION PRESERVE
+DO
+DELETE FROM vipcustomers WHERE emailverify =2;
+
+
+SHOW EVENTS;
+SELECT * FROM vipcustomers;
+
+=>DROP EVENT
+DROP EVENT IF EXISTS vipcustomers_eve;
+
+vipcustomers
+id
+name
+email
+emailverify
+________________________________________________________________________________
+=>Recurring Event
+
+CREATE TABLE dailywifipassword(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	password VARCHAR(8) NOT NULL UNIQUE,
+	status INT DEFAULT 1
+);
+DESC dailywifipassword;
+
+INSERT INTO dailywifipassword(password,status)
+VALUE ('11111',2),
+('22222',2),
+('33333',2),
+('44444',2),
+('55555',1);
+
+
+Method 1
+CREATE EVENT dailywifipassword_eve
+ON SCHEDULE EVERY 1 DAY
+STARTS '2022-2-16 10:54:00'
+DO
+UPDATE dailywifipassword SET status = 2
+WHERE status = 1;
+
+SHOW EVENTS;
+SELECT * FROM ailywifipassword;
+DROP EVENT IF EXISTS dailywifipassword_eve;
+
+___________
+Method 2
+CREATE EVENT dailywifipassword_eve
+ON SCHEDULE EVERY 1 DAY
+STARTS '2022-2-16 11:08:00'
+ENDS '2022-2-16 11:09:00'
+DO
+UPDATE dailywifipassword SET status = 2
+WHERE status = 1;
+
+INSERT INTO dailywifipassword(password,status)
+VALUE ('66666',1),
+('77777',1);
+
+
+SHOW EVENTS;
+SELECT * FROM dailywifipassword;
+DROP EVENT IF EXISTS dailywifipassword_eve;
+
+16ENV

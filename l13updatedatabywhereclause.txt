@@ -1,0 +1,38 @@
+__Update Data by WHERE clause_
+
+NOTE:: Be careful when updating records in a table;
+
+UPDATE Syntax
+
+UPDATE tablename
+SET column1=value1, column2=value2,...
+WHERE condition;
+
+eg Syntax
+
+-UPDATE customers
+-SET contactname = 'maung maung', city='mandalay'
+-WHERE customerid =1;
+customerid 	customername	city
+        1.		 aung aung 	yangon
+
+        1.		maung maung 	mandalya
+
+__________________________________________________________
+exercise
+
+UPDATE mobiles
+SET made = 'thailand'
+WHERE brand='samsung';
+
+UPDATE mobiles 
+SET bran='nokia' 
+WHERE made='japan';
+
+UPDATE mobiles
+    -> SET bran='iphone'
+    -> WHERE bran='unamed';
+
+UPDATE mobiles
+SET bran='sony'
+WHERE made='china';

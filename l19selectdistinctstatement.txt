@@ -1,0 +1,96 @@
+DISTINCT STATMENT
+DISITINCT Synatx
+
+SELECT DISTINCT column1,column2...
+FROM tablname;
+___________________________________________
+
+exercise
+
+SELECT * FROM  employees;
+
+SELECT DISTINCT city FROM employees;
+
+SELECT DISTINCT salary FROM employees;
+
+ SELECT DISTINCT age FROM employees ORDER BY age;
+
+SELECT COUNT(DISTINCT city) FROM employees;
+___________________________________________
+GROUP BY Clause
+
+Note: same value into summary (eg..city,country,age)
+	used with aggregate functions(COUNT(),MAX(),MIN(),SUM(),AVG())
+	GROUP BY Is placed after the WHERE clause.
+	GROUP  byt condition column name must have in expression
+
+-Syntax
+SELECT col1,col2,arregate(col3),.............
+FROM tablename
+WHERE condition...
+GROUP BY col1,col2,.......,col_n;
+___________________________________________
+GROUP By vs DISTINCT
+
+SELECT DISTINCT city FROM persons;
+SELECT city FROM persons GROUP BY city;
+
+SELECT DISTINCT address FROM persons;
+SELECT city FROM persons GROUP BY address 
+___________________________________________
+GROUP BY with COUNT()
+
+SELECT COUNT(*),city FROM persons GROUP BY city;
+SELECT COUNT(*),address FROM persons GROUP BY address;
+
+SELECT COUNT(*),firstname FROM persons GROUP BY firstname;
+SELECT COUNT(*),lastname FROM persons GROUP BY lastname;
+
+SELECT COUNT(*),city FROM persons GROUP BY city ORDER BY city DESC;
+SELECT COUNT(*),address,city FROM persons GROUP BY address,city;
+___________________________________________
+GROUP BY clause with MIN()/MAX()/SUM()
+
+SELECT COUNT(*),salary FROM employees GROUP BY salary
+SELECT city,SUM(salary) FROM employees GROUP BY city
+
+SELECT city,MIN(salary) FROM employees GROUP BY city
+
+SELECT city,MIN(salary),COUNT(*) FROM employees GROUP BY city;
+
+___________________________________________
+
+GROUP BY with CONCAT
+
+SELECT CONCAT('employee in',city) AS 'show location,MAX(salary) FROM employees GROUP BY city
+___________________________________________
+GROUP BY with AVG()
+
+SELECT city,AVG(salary) FROM employees GROUP BY city
+_______________________________________________________________________________________________________
+=>HAVING Clause = can use with after GROUP BY 
+Sytax 
+
+SELECT col1,col2,col3,..
+FROM tablename
+WHERE condition...
+GROUP BY col1,col2,col3...........,col_n
+HAVING codition;
+___________________________________________
+Exercise
+SELECT * FROM employees
+
+SELECT COUNT(*),city FROM employees GROUP BY city
+SELECT COUNT(*),city FROM emplouees WHERE city LIKE 'ma%' GROUP BY city
+
+
+15HV
+
+___________________________
+SELECT COUNT(*),city FROM employees
+GROUP BY city
+HAVING city LIKE 'ma%';
+
+SELECT city,SUM(salary) FROM emloyees
+GROUP BY city
+HAVING SUM(salar) < 2000000;

@@ -1,0 +1,82 @@
+CASE Statement
+
+=Syntax
+SELECT col1,col2,col3,...,, ,
+	CASE
+	      WHEN Comd THEN  ' '
+	      WHEN Comd THEN ''
+	       WHEN Comd THEN ''
+	       ELSE ''
+	END AS ....
+FROM tablename;
+
+SELECT * FROM employees;
+
+SELECT name,age,salary,city,
+  CASE
+	WHEN age < 18 THEN 'young'
+	ELSE 'elder'
+  END AS 'age cal'
+FROM employees;
+
+SELCT name,age,salary,city,
+  CASE
+	WHEN age < 18 'young'
+	WHEN age < 30 THEN 'older'
+	ELSE 'Retired'
+  END AS 'age verfiy'
+FROM employees
+
+SELECT name,age,salary,city
+  CASE 
+	WHEN age < 18 THEN 'young'
+	WHEN age >= 35 'manager'
+	ELSE 'mid lvl'
+ END AS 'position'
+FROM employees;
+
+
+SELCT name,age,salary,city,
+  CASE
+	WHEN age < 18  THEN 'young'
+	WHEN age < 18AND age <= 34 THEN 'elder'
+	ELSE 'manger'
+  END AS 'age verfiy'
+FROM employees
+
+----------------------
+Execise
+
+CREATE TABLE IF NOT EXISTS handsets(
+id INT NOT NULL AUTO_INCREMENT,
+name VARCHAR(100),
+sellprice DECIMAL(10,2).
+stock INT,
+PRIMARY KEY(id)
+);
+DESC handsets;
+
+
+INERT INTO handsets(name,sellprice,stock)
+VLAUES('samsung note 10', 1500000,35),
+('saumsung s9',900000,35),
+('samsung a4',500000,10),
+('vivo v6',800000,20),
+('vivo 12', 500000,40),
+('oppo f10',800000,18),
+('oppp d12', 1200000,30),
+('sony e9',500000,50),
+('nokia 15',300000,8),
+('mi note10',900000,0);
+
+
+SELECT name,sellprice,stock,
+	CASE
+	        WHEN stock BETWEEN 1 AND 10 THEN 'max order 10'
+	         WHEN stock BETWEEN 11 AND 20 THEN 'max order 20'
+	         WHEN stock BETWEEN 21 AND 30 THEN 'max order 30'
+	         WHEN stock BETWEEN 31 AND 40 THEN 'max order 40'
+	         WHEN stock BETWEEN 41 AND 50 THEN 'max order 50'
+	        ELSE 'out of stock
+	END AS 'stock control'
+FROM handsets;	

@@ -1,0 +1,30 @@
+Check Databases
+
+-SHOW DATABASES;
+
+---------------------------
+Create Database
+
+-CREATE DATABASE wdf6274;
+---------------------------
+Delete Database
+
+-DROP DATABASE wdf6274;
+----------------------------
+Choose Database
+-USE wdf6274
+-------------------------------
+Check Current Database
+-SELECT database();
+---------------------------------
+Database Name
+Can Create
+-CREATE DATABASE wdf6274;(not user 12345,!@#$)all small.
+--book_shop;
+--myapp123;
+--bookingsystem;
+Can't Create
+--My App;
+--23455;
+--!@#$%;
+------------------------------------

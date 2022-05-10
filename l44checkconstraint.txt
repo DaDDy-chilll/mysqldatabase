@@ -1,0 +1,74 @@
+=>>CHECK CONSTRAINT
+=>CHECK
+CREATE TABLE IF NOT EXISTS purchases(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL UNIQUE,
+	ordinaryprice DECIMAL(10,2) NOT NULL,
+	sellprice DECIMAL(10,2) NOT NULL
+);
+
+DESC purchases;
+
+INSERT INTO purchases(name,ordinaryprice,sellprice)
+VALUES('redbull',-400,-600);
+
+SELECT * FROM purchases;
+
+DROP TABLE purchases;
+
+
+=EXERCISE
+
+
+CREATE TABLE IF NOT EXISTS purchases(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL UNIQUE,
+	ordinaryprice DECIMAL(10,2) NOT NULL CHECK(ordinaryprice >= 0),
+	sellprice DECIMAL(10,2) NOT NULL CHECK(sellprice >= 0)
+);
+
+DESC purchases;
+
+INSERT INTO purchases(name,ordinaryprice,sellprice)
+VALUES
+('sponsor',300,500),
+('deedo',100,150),
+_________________________________________________________________
+****error
+CREATE TABLE IF NOT EXISTS purchases(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL UNIQUE,
+	ordinaryprice DECIMAL(10,2) NOT NULL CHECK(ordinaryprice >= 0),
+	sellprice DECIMAL(10,2) NOT NULL CHECK(sellprice >= ordinaryprice )
+);
+
+=>>CHECK CONSTRAINT
+
+CREATE TABLE IF NOT EXISTS purchases(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL UNIQUE,
+	ordinaryprice DECIMAL(10,2) NOT NULL CHECK(ordinaryprice >= 0),
+	sellprice DECIMAL(10,2) NOT NULL,
+	CONSTRAINT cc_ordinary_sellprice CHECK(sellprice >= ordinaryprice)
+);
+
+DESC purchases;
+SHOW INDEX FROM purchases;
+
+INSERT INTO purchases(name,ordinaryprice,sellprice)
+VALUES
+('sponsor',300,500),
+('deedo',100,120);
+
+**error
+INSERT INTO purchases(name,ordinaryprice,sellprice)
+VALUES
+('redbull',300,100);
+
+INSERT INTO purchases(name,ordinaryprice,sellprice)
+VALUES
+('rose',300,300);
+
+DROP TABLE purchases;
+
+12CK

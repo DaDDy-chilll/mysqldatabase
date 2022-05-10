@@ -1,0 +1,26 @@
+__Order by (key word) Use for Sorting Our Results__
+
+Order by Syntax(ascending/descending)
+
+Method 1
+-SELECT * FROM tablename
+-ORDER BY columnname ASC|DESC
+______________________________________________
+exercise
+
+SELECT * FROM studentstable;
+
+SELECT * FROM studentstable ORDER BY firstname ASC;
+
+*Default is ASC
+SELECT * FROM studentstable ORDER BY firstname;
+
+SELECT * FROM employees ORDER BY name,age;
+SELECT * FROM employees ORDER BY name,age ASC;
+
+ SELECT name,age,salary FROM employees ORDER BY name,age;
+
+ SELECT name,age,salary FROM employees ORDER BY 2;
+SELECT name,age,salary FROM employees ORDER BY 2 DESC;
+---2 is column number--
+SELECT * FROM employees ORDER BY 2;

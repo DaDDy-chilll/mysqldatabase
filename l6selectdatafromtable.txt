@@ -1,0 +1,18 @@
+Select Data From Table(how do we retreve and search data ??);
+-SELECT DATA ();
+Method 1-Syntax
+-SELECT  * FROM tablename;
+
+Method 2-Syntax
+-SELECT column 1,column 2,column 3 FROM tablename;
+
+----------------------------------------
+Method 1
+server login
+db login
+db choose
+-SELECT *  FROM persons;
+
+Method 2
+-SELECT personid,firstname,city FROM persons;
+

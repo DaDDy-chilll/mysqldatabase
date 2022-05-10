@@ -1,0 +1,21 @@
+__REVERSE__
+
+REVERSE Syntax
+
+SELECT REVERSE('hello world');
+Result- dlrow olleh   
+
+SELECT REVERSE('meow meow');
+Result- woem woem 
+
+SELECT * FROM persons;  
+
+SELECT REVERSE(firstname) FROM persons;
+
+-REVERSE() with CONCAT()
+
+SELECT CONAT('woof',' = ',REVERSE('woof'));
+
+SELECT CONCAT(REVER(firstname),' = ', firstname) FROM persons;
+SELECT CONCAT(firstname,' = ',REVERSE(firstname)) FROM person;
+SELECT CONCAT(firstname, ' = ',REVERSE(firstname))AS 'rename' FROM persons;

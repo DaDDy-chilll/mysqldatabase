@@ -1,0 +1,90 @@
+=> Join   // 22/01/2022(Sat)
+
+1.INNER JOIN (or sometimes call Simple Join)
+2.LEFT OUTER JOIN (or we can call LEFT Join)
+3.RIGHT OUTER JOIN (or we can call Right Join)
+4.FULL JOIN
+
+_______________________________________________________
+
+CREATE TABLE customers(
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     firstname VARCHAR(20),
+     lastname VARCHAR(20),
+     email VARCHAR(50)
+     );
+
+CREATE TABLE IF NOT EXISTS orders(
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     orderdate DATE,
+     amount DECIMAL(10,2),
+     customer_id INT
+     );
+
+ INSERT INTO customers (firstname,lastname,email) 
+ VALUES ('aung','aung','aungaung@gamil.com'),
+     ('maung','maung','maungmaung@gmail.com'),
+     ('kyaw','kyaw','kyawkyaw@gmail.com'),
+     ('zaw','zaw','zawzaw@gmail.com'),
+     ('su','su','susu@mail.com'),
+     ('yu','yu','yuyu@gmail.com');
+
+
+INSERT INTO orders(orderdate,amount,customer_id)
+ VALUES ('2021/02/10',99.99,1)
+ 	 ('2021/10/11',75.35,1),
+     ('2021/06/12',100.26,3),
+     ('2021/07/13',13.25,2),
+     ('2021/01/14',45,3);
+
+INSERT INTO orders(orderdate,amount,customer_id)
+ VALUES ('2021/02/10',99.99,1),
+ 	 ('2021/10/11',75.35,1),
+     ('2021/06/12',100.26,3),
+     ('2021/07/13',13.25,2),
+     ('2021/01/14',45,3);
+
+     INSERT INTO orders (orderdate,amount,customer_id)
+     VALUE ('2021/10/10',70.25,20);
+
+     SELECT * FROM customers WHERE lastname = 'aung';
+
+     SELECT * FROM orders WHERE customer_id = 1;
+
+     SELECT * FROM orders WHERE customer_id = (SELECT id FROM customers WHERE lastname = 'aung');
+
+     SELECT * FROM customers WHERE lastname = 'maung';
+
+     SELECT * FROM orders WHERE customer_id = (
+     SELECT id FROM customers
+     WHERE lastname = 'maung'
+     );
+
+     INSERT INTO customers(firstname,lastname,email)
+     VALUE ('htoo','aung','htooaung@gmail.com');
+
+    *error = the result can return unique
+     SELECT * FROM orders WHERE customer_id = (
+     SELECT id FROM customers
+     WHERE lastname = 'aung'
+     );
+
+SELECT * FROM orders WHERE customer_id = 8;
+
+SELECT * FROM orders WHERE customer_id = (
+SELECT id FROM customers
+WHERE email = 'htooaung@gmail.com'
+);
+
+_______________________________________________________________________________
+-Cross join-
+
+SELECT * FROM customers;
+SELECT * FROM orders;
+
+Result = mixing resut show 
+SELECT * FROM customers,orders;
+SELECT * FROM orders,customers;
+_______________________________________________________________________________
+
+

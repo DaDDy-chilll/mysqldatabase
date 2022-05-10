@@ -1,0 +1,184 @@
+=> VIEW
+
+=>Syntax
+
+*CREATE 
+CREATE VIEW vw_tablename AS
+	--statements
+
+
+*READ
+SELECT columns FROM viewname;
+
+*UPDATE
+CREATE OR REPLACE VIEW vw_tablename AS
+	--statements
+
+
+*DELETE
+DROP VIEW IF EXISTS viewname;
+
+
+=>List all tables (Base Table)
+SHOW TABLES;
+SHOW FULL TABLES;
+SHOW FULL TABLES WHERE TABLE_TYPE LIKE 'BASE TABLE';
+SHOW FULL TABLES IN wdf6810 WHERE TABLE_TYPE LIKE 'BASE TABLE';
+
+=>List all view (VIEW)
+SHOW FULL TABLES WHERE TABLE_TYPE LIKE 'VIEW';
+SHOW FULL TABLES IN wdf6810 WHERE TABLE_TYPE LIKE 'VIEW';
+
+
+
+___________________________________________________________________
+
+CREATE TABLE IF NOT EXISTS shoppers(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	phone VARCHAR(15) NOT NULL UNIQUE 
+);
+
+DESC shoppers;
+SHOW INDEX FROM shoppers;
+
+INSERT INTO shoppers(name,phone)
+VALUES('su su','0911111'),
+('tun tun','0922222');
+
+SELECT * FROM shoppers;
+
+CREATE TABLE IF NOT EXISTS products(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL UNIQUE,
+	price DECIMAL(10,2) NOT NULL
+);
+
+DESC products;
+SHOW INDEX FROM products;
+
+INSERT INTO products(name,price)
+VALUES('redbull',600),
+('Sponser',500);
+
+SELECT * FROM products;
+
+CREATE TABLE IF NOT EXISTS checkouts(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	date TIMESTAMP DEFAULT NOW(),
+	product_id INT NOT NULL,
+	qty INT NOT NULL,
+	total DECIMAL(10,2) NOT NULL,
+	payment ENUM('VISA','MPU','COD') NOT NULL,
+	shopper_id INT NOT NULL,
+	FOREIGN KEY(shopper_id) REFERENCES shoppers(id),
+	FOREIGN KEY(product_id) REFERENCES products(id)
+);
+
+
+DESC checkouts;
+SHOW INDEX FROM checkouts;
+
+INSERT INTO checkouts(product_id,qty,total,payment,shopper_id)
+VALUES (1,2,1200,3,2),
+(1,5,3000,1,1),
+(2,1,400,2,1),
+(1,2,1200,3,2),
+(2,3,1200,3,2),
+(1,4,2400,1,1);
+
+SELECT * FROM shoppers;
+SELECT * FROM products;
+SELECT * FROM checkouts;
+
+=>Payment Saving
+SELECT payment,total 
+FROM checkouts
+GROUP BY payment;
+
+SELECT payment,SUM(total) AS totalamount
+FROM checkouts
+GROUP BY payment
+ORDER BY totalamount DESC;
+
+CREATE VIEW vw_paymentsaving AS
+SELECT payment,SUM(total) AS totalamount
+FROM checkouts
+GROUP BY payment
+ORDER BY totalamount DESC;
+
+
+DROP TABLE IF EXISTS vw_paymentsaving;
+SELECT * FROM vw_paymentsaving;
+
+=>UPDATE
+CREATE OR REPLACE VIEW vw_paymentsaving AS
+SELECT payment,SUM(total) AS totalamount
+FROM checkouts
+GROUP BY payment
+ORDER BY totalamount ASC;
+
+
+SELECT * FROM vw_paymentsaving;
+
+
+DROP VIEW IF EXISTS vw_paymentsaving;
+
+________________________________________________________________
+
+SELECT name,qty,total
+FROM checkouts
+INNER JOIN products
+ON checkouts.product_id = products.id;
+
+=>Big sales
+SELECT products.name,SUM(checkouts.qty) AS 'totalqty',SUM(checkouts.total) AS totalamount
+FROM checkouts
+INNER JOIN products
+ON checkouts.product_id = products.id
+GROUP BY checkouts.product_id;
+
+
+
+CREATE VIEW vw_bigsales AS
+SELECT products.name,SUM(checkouts.qty) AS 'totalqty',SUM(checkouts.total) AS totalamount
+FROM checkouts
+INNER JOIN products
+ON checkouts.product_id = products.id
+GROUP BY checkouts.product_id;
+
+SHOW FULL TABLES;
+SELECT * FROM vw_bigsales;
+
+________________________________________________________________
+
+=>Big Shoppers
+
+SELECT shoppers.name,SUM(checkouts.qty) AS 'totalqty',SUM(checkouts.total) AS totalamount
+FROM checkouts
+INNER JOIN shoppers
+ON checkouts.shopper_id = shoppers.id
+GROUP BY checkouts.shopper_id;
+
+CREATE VIEW vw_bigshoppers AS
+SELECT shoppers.name,SUM(checkouts.qty) AS 'totalqty',SUM(checkouts.total) AS totalamount
+FROM checkouts
+INNER JOIN shoppers
+ON checkouts.shopper_id = shoppers.id
+GROUP BY checkouts.shopper_id;
+
+SELECT * FROM vw_bigshoppers;
+SHOW FULL TABLES WHERE TABLE_TYPE LIKE 'VIEW';
+
+DESC vw_bigshoppers;
+
+*error = cannot insert data records cuz view table (not bse table)
+INSERT INTO vw_bigshoppers(name,totalqty,totalamount)
+VALUES ("kyaw kyaw",15,5000);
+________________________________________________________________
+
+SELECT shoppers.name,SUM(checkouts.qty) AS 'totalqty',SUM(checkouts.total) AS totalamount
+FROM checkouts
+INNER JOIN shoppers
+ON checkouts.shopper_id = shoppers.id
+GROUP BY checkouts.shopper_id;

@@ -1,0 +1,56 @@
+Intsert Data to Table
+1.Insert Single Data
+2.Insert Muti Data
+
+1.Insert Sigle Data _ Syntax
+Method 1 
+INSERT INTO tablename (column1,column2,column3,....)
+VALUES (value1,vaule2,value3,...);
+
+Method 2
+INSERT INTO tablename
+VALLUES (value1,value2,value3,....);
+--------------------------------------------
+Exercise
+Method 1
+INSERT INTO persons(personid,fastname,lastname,city,address)
+VALUES (1,'paing sett','kyaw','yangon','no.9,myittar st');
+
+INSERT INTO persons(personid,fastname,lastname,city,address)
+VALUES (1,'aung','hla','yangon','no.9,thida st');
+
+INSERT INTO persons(firstname,lastname,city,address,personid)
+VALUES ('su su','hlaing','yangon','no.9,tamwe',3);
+------
+INSERT INTO persons  VALUES (4,'hmin si','khin','mandalay','no.12,st 60');
+
+------------------------------------------------------------------------------------------
+2.Insert Muti Data_Syntax
+
+INSERT INTO tablename ( column 1,column 2,column 3,..)
+VALUES (value 1,value 2,value 3,..),
+	(value 1,value 2,value 3,..),
+	(value 1,value 2,value 3,..),	
+	(value 1,value 2,value 3,..);
+---------
+INSERT INTO tablename VALUES (value 1,value 2,value 3,..),
+			   (value 1,value 2,value 3,..),
+			  (value 1,value 2,value 3,..),
+			  ... ;
+--------------------------------
+Example
+
+-INSERT INTO persons (personid,firstname,lastname,city,address)
+VALUES (5,'nu','nu','mandalay','no.19,myittar st'),
+	(6,'mya','mya','mandalay','no.29,myittar st'),
+	(7,'lu lu','aung','mandalay','no.39,myittar st');
+
+-INSERT INTO persons (firstname,lastname,personid,city,address)
+VALUES ('yu','yu',8,'mandalay','no.49,myittar st'),
+	('kyaw','kyaw',9,'mandalay','no.59,myittar st'),
+	('mya','mya',10,'mandalay','no.69,myittar st');
+
+VALUES (11,'pa','pa','mandalay','no.19,myittar st'),
+       (12,'hla','hla','mandalay','no.29,myittar st'),
+       (13,'ma','ma','mandalay','no.39,myittar st');
+

@@ -1,0 +1,287 @@
+=> References and Cascade
+
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS orders;
+
+CREATE TABLE IF NOT EXISTS customers(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	firstname VARCHAR(20),
+	lastname VARCHAR(20),
+	email VARCHAR(50)
+);
+
+DESC customers;
+
+CREATE TABLE IF NOT EXISTS orders(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	orderdate DATE,
+	amount DECIMAL(10,2),
+	customer_id INT,
+	FOREIGN KEY(customer_id) REFERENCES customers(id)
+);
+
+DESC orders;
+
+INSERT INTO customers(firstname,lastname,email)
+VALUES('aung','aung','aungaung@gmail.com'),
+('maung','maung','maungmaung@gmail.com'),
+('kyaw','kyaw','kyawkyaw@gmail.com'),
+('zaw','zaw','zawzaw@gmail.com'),
+('su','su','susu@gmail.com'),
+('aye','aye','ayeaye@gmail.com'),
+('yu','yu','yuyu@gmail.com');
+
+SELECT * FROM customers;
+
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2020/02/10',99.99,1),
+('2021/10/11',75.35,1),
+('2021/06/12',100.26,3),
+('2021/07/13',13.25,2),
+('2021/01/14',45,3);
+
+SELECT * FROM orders;
+
+*error = cuz of customer id
+INSERT INTO
+
+*error  = cuz of customer id
+DELETE FROM customers WHRE id = 4;
+
+can delet 
+DELETE FROM customers WHRE id = 6;
+
+SELECT * FROM customers
+LEFT JOIN orders
+ON customers.id = orders.customer_id;
+
+SELECT * FROM orders
+LEFT JOIN customers
+ON customers.id = orders.customer_id;
+
+DROP TABLE IF EXISTS orders;
+_______________________________
+=> Cascade ( DELETE)
+CREATE TABLE IF NOT EXISTS orders(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	orderdate DATE,
+	amount DECIMAL(10,2),
+	customer_id INT,
+	FOREIGN KEY(customer_id) REFERENCES customers(id) ON DELETE CASCADE
+);
+
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2020/02/10',99.99,1),
+('2021/10/11',75.35,1),
+('2021/06/12',100.26,3),
+('2021/07/13',13.25,2),
+('2021/01/14',45,3);
+
+SELECT * FROM ordes;
+
+*error = cuz of customer id
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2021/10/10',70.25,20);
+
+can delte = cuz of Cascade
+DELETE FROM customers WHERE id =3;
+
+SELECT * FROM customers;
+SELECT * FROM orders;
+
+can delete
+DELETE FROM customers WHERE id = 4
+
+*error = can't truncate or drop cuz of fk in orders
+TRUNCATE TABLE customers;
+DROP TABLE IF EXISTS customers;
+
+SELECT * FROM customers;
+________________________________________________________________________
+=> Cascade ( UPDATE )
+
+CREATE TABLE IF NOT EXISTS customers(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	firstname VARCHAR(20),
+	lastname VARCHAR(20),
+	email VARCHAR(50)
+);
+
+
+DESC customers;
+
+INSERT INTO customers(firstname,lastname,email)
+VALUES('aung','aung','aungaung@gmail.com'),
+('maung','maung','maungmaung@gmail.com'),
+('kyaw','kyaw','kyawkyaw@gmail.com'),
+('zaw','zaw','zawzaw@gmail.com'),
+('su','su','susu@gmail.com'),
+('aye','aye','ayeaye@gmail.com'),
+('yu','yu','yuyu@gmail.com');
+
+CREATE TABLE IF NOT EXISTS orders(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	orderdate DATE,
+	amount DECIMAL(10,2),
+	customer_id INT,
+	FOREIGN KEY(customer_id) REFERENCES customers(id)
+);
+
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2020/02/10',99.99,1),
+('2021/10/11',75.35,1),
+('2021/06/12',100.26,3),
+('2021/07/13',13.25,2),
+('2021/01/14',45,3);
+
+
+
+SELECT * FROM ordes;
+
+*error = cuz of customer id
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2021/10/10',70.25,20);
+
+*can't delte 
+DELETE FROM customers WHERE id =3;
+
+can delet
+DELETE FROM customers WHERE id = 7;
+
+can't update
+UPDATE customers SET id = 7 WHERE id =3;
+
+can upate for other fields
+UPDATE customers SET firstname = 'nu nu' WHERE id = 3;
+
+SELECT * FROM customers;
+
+can update
+UPDATE customers SET id =7 WHERE id =6;
+
+______________________
+*error = can't truncate or drop cuz of fk in orders
+TRUNCATE TABLE customers;
+DROP TABLE IF EXISTS customers;
+
+SELECT * FROM customers;
+
+______________________
+
+CREATE TABLE IF NOT EXISTS orders(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	orderdate DATE,
+	amount DECIMAL(10,2),
+	customer_id INT,
+	FOREIGN KEY(customer_id) REFERENCES customers(id) ON UPDATE CASCADE
+);
+
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2020/02/10',99.99,1),
+('2021/10/11',75.35,1),
+('2021/06/12',100.26,3),
+('2021/07/13',13.25,2),
+('2021/01/14',45,3);
+
+
+
+SELECT * FROM ordes;
+
+*error = cuz of customer id
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2021/10/10',70.25,20);
+
+can't delte 
+DELETE FROM customers WHERE id =3;
+
+can delet
+DELETE FROM customers WHERE id = 8;
+
+can update
+UPDATE customers SET id = 7 WHERE id =3;
+
+SELECT * FROM customers;
+SELECT * FROM orders;
+
+can upate for other fields
+UPDATE customers SET firstname = 'kyaw' WHERE id = 3;
+
+SELECT * FROM customers;
+
+can update
+UPDATE customers SET id =6 WHERE id =5;
+
+SELECT * FROM customers;
+
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS customers;
+_______________________________________________________
+=>CASCADE (UPDATE DELECT)
+
+
+CREATE TABLE IF NOT EXISTS customers(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	firstname VARCHAR(20),
+	lastname VARCHAR(20),
+	email VARCHAR(50)
+);
+
+INSERT INTO customers(firstname,lastname,email)
+VALUES('aung','aung','aungaung@gmail.com'),
+('maung','maung','maungmaung@gmail.com'),
+('kyaw','kyaw','kyawkyaw@gmail.com'),
+('zaw','zaw','zawzaw@gmail.com'),
+('su','su','susu@gmail.com'),
+('aye','aye','ayeaye@gmail.com'),
+('yu','yu','yuyu@gmail.com');
+
+CREATE TABLE IF NOT EXISTS orders(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	orderdate DATE,
+	amount DECIMAL(10,2),
+	customer_id INT,
+	FOREIGN KEY(customer_id) REFERENCES customers(id) 
+	ON UPDATE CASCADE 
+	ON DELETE CASCADE
+);
+
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2020/02/10',99.99,1),
+('2021/10/11',75.35,1),
+('2021/06/12',100.26,3),
+('2021/07/13',13.25,2),
+('2021/01/14',45,3);
+_______________________________________________________
+=> ON DELECT SET NULL(SET NULL is just for ON DELETE)
+CREATE TABLE IF NOT EXISTS customers(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	firstname VARCHAR(20),
+	lastname VARCHAR(20),
+	email VARCHAR(50)
+);
+
+INSERT INTO customers(firstname,lastname,email)
+VALUES('aung','aung','aungaung@gmail.com'),
+('maung','maung','maungmaung@gmail.com'),
+('kyaw','kyaw','kyawkyaw@gmail.com'),
+('zaw','zaw','zawzaw@gmail.com'),
+('su','su','susu@gmail.com'),
+('aye','aye','ayeaye@gmail.com'),
+('yu','yu','yuyu@gmail.com');
+
+CREATE TABLE IF NOT EXISTS orders(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	orderdate DATE,
+	amount DECIMAL(10,2),
+	customer_id INT,
+	FOREIGN KEY(customer_id) REFERENCES customers(id) 
+	ON DELETE SET NULL
+);
+
+INSERT INTO orders(orderdate,amount,customer_id)
+VALUES('2020/02/10',99.99,1),
+('2021/10/11',75.35,1),
+('2021/06/12',100.26,3),
+('2021/07/13',13.25,2),
+('2021/01/14',45,3);
+_______________________________________________________

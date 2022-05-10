@@ -1,0 +1,118 @@
+--VARIABLES
+
+@@ - System Variable
+NOTE:: @@ is used for system variables prefix. Global value of the system variable.
+
+@ - User Defined Variable
+NOTE:: while @ is used for use defined variables;
+
+What is a VARIABLE
+*value assign
+*value can change or overwrite
+
+Use for VARIABLE
+counter in looping
+save value
+use in conditional logic
+_________________________________________________________________________
+SHOW VARIABLES;
+
+-@  --USER DEFINED VARIABLES
+*Method 1 ( Using SELECT )
+
+-SELECT @myfirstvar := 'Hello Myanmar';
+SELECT @myfirstvar;
+
+-SELECT @myfirstvar := 'Save Myanmar';
+SELECT @myfirstvar;
+
+eg. SELECT @num1 := 10;
+SELECT @num2 := 20;
+SELECT @num1 + @num2;
+
+-SELECT @num3 := 10;
+SELECT @num4 := 20;
+SELECT @num3 + @num4;
+
+-SELECT @num3 := '30';
+SELECT @num4 := '40';
+SELECT @num3 + @num4;
+
+-SELECT @num1,@num2,@num3,@num4;
+
+-SELECT @num1 AS numberone, @num2 AS numbertwo,@num3+@num4;
+-SELECT  @num1 AS numberone, @num2 AS numbertwo,@num5 :=@num3+@num4;
+
+
+*Method 2 ( Using SET )
+-SET @mysecondvar = 'Data Land';
+SELECT @mysecondvar;
+
+
+SELECT @num1 := 20;
+SELECT name,age,salary,city FROM employees
+WHERE age > @ num1;
+
+SET @90k = 900000;
+SELECT name,age,salary,city FROM employees;
+WHERE salary > @90k;
+_________________________________________________________________________
+=> Warning
+
+SHOW COUNT(*) WARNINGS;
+SELECT @@warning_count
+SELECT @@session.warning_count
+
+*SHOW warings
+SHOW WARNINGS;
+SHOW WARNINGS LIMIT 3;
+SHOW WARNINGS\G;
+
+NOTE:: \G modifier (ego       (\G) Send command to mysql server, display result vertically.)
+mysql > help
+
+SELECT * FROM tablename \G;
+
+NOTE:: \W modifier ( warnings \W Show warnings after every statement.)
+NOTE:: \w moiifer (nowarning \w Don't show warnings after every statement.)
+eg. SELECT 1/0;
+
+=> ERROR
+*Show Errors Count
+SHOW COUNT(*) ERRORS:
+SELECT @@error_count;
+
+*Show Errors
+SHOW ERRORS;
+SHOW ERRORS\G;
+
+EG DROP TABLE abc;  SELECT myfun();
+
+=>Change Error Count Setting;
+SHOW VARIABLES LIKE 'max_error_count';
+SET max_error_count = 1024;
+_______________________________________________________________________
+**Important SELECT Queries;
+=> Chaeck User
+status;
+SELECT USER();
+SELECT USER() AS 'username';
+_______________________________________________________________________
+->Get Mysql TimeZone
+
+SHOW VARIABLES LIKE "%time_zone%";
+*result
+| Variable_name    | Value  |
++------------------+--------+
+| system_time_zone | UTC    |
+| time_zone        | +06:30 
+
+
+SELECT @@time_zone;
+SELECT @@global.time_zone;
+SELECT @@session.time_zone;
+
+->Change Msql timezone
+SET time_zone = '+07:00'; <one session can be change but logout replace normal time)
+SET GLOBAL time_zone = '+07:00';
+SET @@global.tiem_zone = '+06:00';

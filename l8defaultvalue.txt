@@ -1,0 +1,66 @@
+=>DEFAULT VALUE
+
+CREATE TABLE mobiles(
+	brand VARCHAR(100) DEFAULT 'unnamed',
+	made VARCHAR(20) DEFAULT 'china',
+);
+
+DESC mobiles;
+
+INSERT INTO mobiles (brand,made)
+VALUE ('samsung','korea');
+
+SELECT * FROM mobiles;
+
+INSERT INTO mobiles(brand)
+VALUE ('mi');
+
+INSERT INTO mobiles(made)
+VALUE ('japan');
+
+INSERT INTO mobiles()
+VALUE();
+
+SELECT * FROM mobiles ;
+______________________________________________________
+=> NO NULL and DEFAULT
+
+CREATE TABLE vechicles(
+	 brand VARCHAR (100) NOT NULL DEFAULT 'unnamed',
+	 made VARCHAR (20) NOT NULL DEFAULT 'china'
+);
+
+SHOW TABLES;
+
+INSERT INTO vechicles(brand,made)
+VALUE ('toyota','japan');
+
+SELECT * FROM vechicles;
+
+INSERT INTO vechicles(brand)
+VALUE ('suzuki');
+
+INSERT INTO vechicles(made)
+VALUE ('us');
+
+INSERT INTO vechicles ()
+VALULE();
+
+SELECT * FROM vechicles;
+
+*error
+INSERT INTO vechicles(brand,made)
+VALUE('toyota',NULL);
+
+*error
+INSERT INTO vechicles(brand,made)
+VALUE (NULL,'indonesia');
+
+*error
+INSERT INTO vechicles( brand, made)
+VALUE (NULL,NULL);
+
+INSERT INTO vechicles(brand,made)
+VALUE ('NULL','NULL');
+
+INSERT INTO 

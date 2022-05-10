@@ -1,0 +1,89 @@
+Primary Key Constraint(PK)
+
+PK unique identifier
+the PK constraint uniquely each record in table.
+PK value must unique, cannot contain NULL values.
+PK single or multiple colums(fields).
+
+Primary Key - Syntax
+Method 1
+CREATE TABLE persons(
+	id INT NOT NULL ,
+	firstname VARCHAR(255) NOT NULL,
+	lastname VARCHAR(255) ,
+	age INT,
+	PRIMARY KEY(id)
+);
+
+Method 2
+CREATE TABLE persons(
+	id INT NOT NULL PRIMARY KEY,
+	firstname VARCHAR(255) NOT NULL,
+	lastname VARCHAR(255),
+	age INT
+	
+);
+-------------------------
+CREATE TABLE computers(
+	brand VARCHAR(255),
+	made VARCHAR(255)
+);
+INSERT INTO compters(brand,made)
+VALUE ('asus','china');
+
+INSERT INTO computers(brand,mad)
+VALUE ('asus','china');
+
+DROP TABLE computers:
+
+_Create Table with PK by brand__
+
+CREATE TABLE computers(
+	brand VARCHAR(255) NOT NULL,
+	made VARCHAR(255),
+	PRIMARY KEY(brand)
+);
+DESC computers;
+
+INSERT INTO computers(brand,made)
+VALUE ('asus','china');
+
+INSERT INTO computers(brand,made)
+VALUE ('hp','thai');
+
+**error**
+INSERT INTO computers(brand,made)
+VALUE ('asus','india);
+
+CREATE TABLE computers(
+	id INT NOT NULL  PRIMARY KEY,
+	brand VARCHAR(255),
+	made VARCHAR(255)
+);
+
+**error*
+INSERT INTO computers(brand,made)
+VALUE ('asus','china');
+---------------------------------------------------------------------------------------------------
+Create Table with PK by id using AUTO INCREMENT
+
+CREATE TABLE computers(
+	id INT NOT NULL AUTO_INCREMENT,
+	brand VARCHAR(255),
+	mde VARCHAR(255),
+	PRIMARY KEY(id)
+);
+
+INSRT INTO computers(brand,made)
+VALUE ('asus','china');
+
+*error*
+INSRT INTO computers(id,brand,made)
+VALUE (3,'asus','china');
+
+
+INSRT INTO computers(id,brand,made)
+VALUE (6,'asus','china');
+
+INSRT INTO computer(brand,made)
+VALUE ('dell','indo');

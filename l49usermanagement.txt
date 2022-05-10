@@ -1,0 +1,217 @@
+=>Comments
+(i)Single Line Comment
+# comment here ( space or without space is ok)
+-- comment here( space needed)
+/* comment here */ ( space or without space is ok) 
+
+(ii) Muti Line Comments
+/*
+multi comment one
+multi comment two
+*/
+
+SELECT (1+1); #comment here
+
+SELECT (1+1); -- comment here
+
+SELECT (1+1); /*comment here*/
+_________________________________________________________________
+=>CREATE user
+
+=Synax :
+CREATE USER username IDENIFIED BY 'passowrd';
+
+CREATE USER 'daddy001'@'localhost' IDENIFIED BY 'dad002';
+
+\q
+mysql -udaddy -p'12345';
+SELECT USER();
+SHOW DATABASES; --result = only 1 sample database;
+SELECT USER FROM mysql.user; -- result
+
+=>Existing Users
+SELECT USER FROM mysql.user;
+SELECT USER FROM mysql.user WHERE USER LIKE 'k%';
+
+
+\q
+wdf6274
+
+Note :  ALL PRIVILEGES ( it gives all privileges to new user )
+	CREATE ( create databases and create tables)
+	DROP ( drop database and drop tables)
+
+	INSERT (specific table)	
+	SELECT (specific tabe)
+	UPDATE(specific table)
+	DELETE(specific table)
+
+=Syntax : (databasename.tablename)
+GRANT ALL PRIVILEGES ON *.* TO 'daddy'@'localhost';
+FLUSH PRIVILEGES;
+GRANT CREATE,SELECT,INSERT ON *.* 'daddy'@'localhost';
+
+SHOW GRANTS FOR 'WDF6274'@'localhost';
+
+\q
+mysql -u root -p'sqlpassword20201A';
+_-------------------------
+
+DROP UER
+Method 1
+=Syntax : (Single)
+DROP USER 'username'@'localhost';
+
+=Syntax : ( Multi)
+DROP USER 'username1'@'localhost','username2'@'localhost';
+
+Method 2
+DELECT FORM mysql.use USER = 'daddy'
+
+SELECT USER FROM mysql.user WHERE USER LIKE 'k%';
+DROP USER 'daddy'@'localhost';
+SELECT USER FROM mysql.user WHERE USER LIEK 'k%';
+
+_____________________________________________________________________________
+=>RENAME USER
+=Syntax : (Single)
+RENAME USER odlname TO newname;
+
+=Syntax : (Multi)
+REANAME USER oldname1 To newname, oldname2 To newname2;
+
+mysql -u root -p'sqlpassword2001A';
+_____________________________________________________________________________
+=>CHANGE USER PASSWORD
+=Syntax :
+ALTER USER 'username'@'localhost' IDENTIFIED BY 'newpassword';
+*error
+mysql -u kotha002 -p'123456789';
+
+mysql -u kotha002 -p'11111';
+
+------------
+
+= By Self
+
+SELECT USER();
+ALTER USER 'kotha002'@'localhost' IDENTIFIED BY '22222';
+
+*error
+\q
+mysql -u kotha002 -p'11111';
+
+mysql -u kotha002 -p'22222';
+_____________________________________________________________________________
+=>Account Lock
+
+=Syntax: (By new User)
+CREATE USER username IDENTIFIED BY 'password' ACCOUNT LOCK;
+
+=Syntax::(to existing user)
+ALTER USER username  ACCOUNT LOCK;
+
+SELECT USER FROM mysql.user WHERE USER LIKE 'k%';
+
+=By user new
+CREATE USER 'kotha003'@'localhost' INDENTIFIED BY  '12345567'
+
+SELECT USER FORM mysql.user WHERE USER LIKE 'k%';
+
+*error = Accoun is locked
+
+\q
+mysql -u kotha003 -p '12343456'
+
+mysql -u kotha -p 'datalandtechnology'
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user;
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'k%';
+
+--------------
+=To existing user
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'k%';
+
+ALTER USER 'kotha002'@'localhost' ACCOUNT LOCK;
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.use WHERE USER LIKE 'k%';
+
+*error = Account is locked
+
+\q
+
+mysql -u kotha002 -p '1111';
+_____________________________________________________________________________
+=>Account Unlock
+
+=Syntax (Single)
+
+ALTER USER username ACCOUNT UNLOCK;
+
+=Syntax ( Multi)
+ALTER USER username1,username2,....ACCOUNT UNLOCK;
+
+mysql -u kotha -p'datalandtechnology'
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'k%';
+
+ALTER USER 'kotha001'@'localhost' ACCOUNT UNLOCK;
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'k%';
+
+ALTER USER 'kotha002'@'localhost';
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'k%';
+
+\q
+mysql -u kotha003 -p'1233445'	
+_____________________________________________________________________________
+=>REVOKE
+
+\q
+mysql -u root -p'sqlpassword20201A'
+
+SHOW GRANTS FOR 'kotha003'@'localhost';
+
+GRANT CREATE,SELECT,INSERT ON *.* TO 'kotha003'@'localhost';
+FLUSH PRIVILEGES;
+
+SHOW GRANTS FOR 'kotha003'@'localhost';
+
+\q
+mysql -u kotha003 -p'123456'
+
+SHOW DATABASE;
+\q
+mysql -u root -p'sqlpassword20201A'
+
+REVOKE ALL PRIVILEGES ON *.* FROM 'kotha003'@'localhost';
+SHOW GRANTS FOR 'kotha003'@'localhost';
+_____________________________________________________________________________
+=>GRANT Vs REVOKE
+
+\q
+mysql -u kotha001 -p'123456'
+SHOW GRANTS FOR 'kotha001'@'localhost';
+
+REVOKE ALL PRIVILEGES ON *.* FROM 'kotha001'@'localhost';
+
+SHOW GRANTS FOR 'kotha001'@'localhost';
+SHOW DATABASES;
+
+\q
+mysql -u root -p'sqlpassword20201A';
+GRANT ALL PRIVILEGES ON kotha007.workers TO 'kotha001'@'localhost';
+FLUSH PRIVILEGES;
+
+SHOW GRANTS FOR 'kotha001'@'localhost';
+
+\q
+mysql -u kotha001 -p'1234567'
+
+SHOW DATABASES;
+USE kotha007;
+SHOW TABLES;
+
